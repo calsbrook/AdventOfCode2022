@@ -18,37 +18,21 @@ def part1():
             secondHalf.add(line[x])
         for item in firstHalf:
             if item in secondHalf:
-                if item.islower():
-                    runningTotal += (ord(item) - 96)
-                elif item.isupper():
-                    runningTotal += (ord(item) - 38)
-                else:
-                    print("HELP")
+                runningTotal += findValue(item)
     print(runningTotal)
 
-def findIntersect(set1, set2, set3):
-    workingSet = set1.intersection(set2)
-    # print(workingSet)
-    finalSet = workingSet.intersection(set3)
-    # print(finalSet)
+def findIntersect(sets):
+    workingSet = sets[0].intersection(sets[1])
+    finalSet = workingSet.intersection(sets[2])
     return list(finalSet)[0]
 
 def part2():
     runningTotal = 0
     workingLines = []
     for line in lines:
-        if len(workingLines) < 3:
-            workingLines.append(line)
-        else:
-            lineSet1 = set()
-            lineSet2 = set()
-            lineSet3 = set()
-            lineSets = [lineSet1, lineSet2, lineSet3]
-            for x in range(0, 3):
-                for letter in workingLines[x]:
-                    if letter != '\n':
-                        lineSets[x].add(letter)
-            result = findIntersect(lineSet1, lineSet2, lineSet3)
+        workingLines.append(set(line.strip()))
+        if len(workingLines) == 3:
+            result = findIntersect(workingLines)
             runningTotal += findValue(result)
             workingLines = []
     print(runningTotal)
