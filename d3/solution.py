@@ -10,15 +10,10 @@ def findValue(letter):
 def part1():
     runningTotal = 0
     for line in lines:
-        firstHalf = set()
-        secondHalf = set()
-        for x in range(0, len(line)//2):
-            firstHalf.add(line[x])
-        for x in range((len(line)//2), len(line)):
-            secondHalf.add(line[x])
-        for item in firstHalf:
-            if item in secondHalf:
-                runningTotal += findValue(item)
+        firstHalf = set(line[:len(line)//2])
+        secondHalf = set(line[len(line)//2:])
+        intersectingSet = firstHalf.intersection(secondHalf)
+        runningTotal += findValue(list(intersectingSet)[0])
     print(runningTotal)
 
 def findIntersect(sets):
@@ -37,4 +32,4 @@ def part2():
             workingLines = []
     print(runningTotal)
 
-part2()
+part1()
