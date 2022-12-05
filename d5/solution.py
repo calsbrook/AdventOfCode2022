@@ -49,4 +49,5 @@ def part2():
         result += stack[0]
     print(result)
 part1()
+stacks = [[],[],[],[],[],[],[],[],[]]
 part2()
